@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prince Lesapo's Loans</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #f0eeeb;
+    --surface:   #e8e5e1;
+    --border:    #c8c4be;
+    --border-strong: #9e9a94;
+    --ink:       #1a1916;
+    --ink-mid:   #4a4744;
+    --ink-faint: #8a8783;
+    --accent:    #1a1916;
+    --positive:  #2d6a4f;
+    --negative:  #9b2335;
+    --mono:      'IBM Plex Mono', monospace;
+    --sans:      'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 48px;
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+  }
+
+  header h1 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  header .sub {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-weight: 300;
+  }
+
+  header .stamp {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── Layout ── */
+  main {
+    max-width: 1040px;
+    margin: 48px auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .panel {
+    background: var(--bg);
+    padding: 36px 32px;
+  }
+
+  .panel-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Fields ── */
+  .field { margin-bottom: 24px; }
+
+  .field-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+
+  .field-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+  }
+
+  .field-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 1px;
+    background: var(--border-strong);
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 4px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--ink);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .field-range {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    margin-top: 3px;
+  }
+
+  /* ── Submit ── */
+  .submit-row {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  button {
+    width: 100%;
+    padding: 13px 20px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  button:hover { opacity: 0.82; }
+  button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ── Result panel ── */
+  .placeholder-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 380px;
+    gap: 10px;
+    color: var(--border-strong);
+  }
+
+  .placeholder-state p {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .result-state { display: none; }
+
+  /* ── Decision ── */
+  .decision-block {
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .decision-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .decision-tag.approved { color: var(--positive); }
+  .decision-tag.denied   { color: var(--negative); }
+
+  .decision-word {
+    font-size: 52px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .decision-word.approved { color: var(--positive); }
+  .decision-word.denied   { color: var(--negative); }
+
+  .decision-conf {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  /* ── SHAP ── */
+  .shap-heading {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 20px;
+  }
+
+  .shap-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 40px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .shap-name {
+    font-size: 11px;
+    color: var(--ink-mid);
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shap-track {
+    height: 2px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .shap-midline {
+    position: absolute;
+    left: 50%; top: -5px;
+    width: 1px; height: 12px;
+    background: var(--border-strong);
+  }
+
+  .shap-fill {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    transition: width 0.5s ease;
+  }
+
+  .shap-fill.pos {
+    left: 50%;
+    background: var(--positive);
+  }
+
+  .shap-fill.neg {
+    right: 50%;
+    background: var(--negative);
+  }
+
+  .shap-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+
+  .shap-legend {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    text-transform: uppercase;
+  }
+
+  .shap-legend .neg-label { color: var(--negative); }
+  .shap-legend .pos-label { color: var(--positive); }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 28px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+    margin-top: 1px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Prince Lesapo's Loans</h1>
+  <span class="sub">Credit Assessment</span>
+  
+</header>
+
+<main>
+  <!-- Left panel: inputs -->
+  <div class="panel">
+    <div class="panel-title">Applicant details</div>
+
+    <div class="field">
+      <div class="field-header">
+        <span class="field-label">Annual Income</span>
+        <span class="field-value" id="val-income">R 45,000</span>
+      </div>
+      <input type="range" id="income" min="15000" max="120000" step="1000" value="45000"
+             oninput="fmt('income', this.value, 'R')">
+      <div class="field-range"><span>R 15,000</span><span>R 120,000</span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-header">
+        <span class="field-label">Age</span>
+        <span class="field-value" id="val-age">30 yrs</span>
+      </div>
+      <input type="range" id="age" min="21" max="65" value="30"
+             oninput="fmt('age', this.value, '', ' yrs')">
+      <div class="field-range"><span>21</span><span>65</span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-header">
+        <span class="field-label">Loan Amount</span>
+        <span class="field-value" id="val-loan_amount">R 20,000</span>
+      </div>
+      <input type="range" id="loan_amount" min="5000" max="80000" step="1000" value="20000"
+             oninput="fmt('loan_amount', this.value, 'R')">
+      <div class="field-range"><span>R 5,000</span><span>R 80,000</span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-header">
+        <span class="field-label">Credit Score</span>
+        <span class="field-value" id="val-credit_score">720</span>
+      </div>
+      <input type="range" id="credit_score" min="300" max="850" value="720"
+             oninput="fmt('credit_score', this.value)">
+      <div class="field-range"><span>300 — Poor</span><span>850 — Excellent</span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-header">
+        <span class="field-label">Existing Debt</span>
+        <span class="field-value" id="val-existing_debt">R 5,000</span>
+      </div>
+      <input type="range" id="existing_debt" min="0" max="50000" step="500" value="5000"
+             oninput="fmt('existing_debt', this.value, 'R')">
+      <div class="field-range"><span>R 0</span><span>R 50,000</span></div>
+    </div>
+
+    <div class="submit-row">
+      <button id="btn" onclick="assess()">Assess Application</button>
+    </div>
+  </div>
+
+  <!-- Right panel: result -->
+  <div class="panel">
+    <div class="panel-title">Assessment result</div>
+
+    <div class="placeholder-state" id="placeholder">
+      <p>Adjust the sliders<br>and assess the application<br>to see the decision.</p>
+    </div>
+
+    <div class="result-state" id="result">
+      <div class="decision-block">
+        <div class="decision-tag" id="d-tag"></div>
+        <div class="decision-word" id="d-word"></div>
+        <div class="decision-conf" id="d-conf"></div>
+      </div>
+
+      <div class="shap-heading">What drove this decision</div>
+      <div id="shap-rows"></div>
+      <div class="shap-legend">
+        <span class="neg-label">← Against approval</span>
+        <span class="pos-label">In favour of approval →</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>DIRISA Student Datathon Training &nbsp;·&nbsp; Model Deployment &nbsp;·&nbsp; Prince Lesapo</footer>
+
+<script>
+const labels = {
+  income: 'Income',
+  age: 'Age',
+  loan_amount: 'Loan amount',
+  credit_score: 'Credit score',
+  existing_debt: 'Existing debt'
+};
+
+function fmt(id, val, prefix = '', suffix = '') {
+  const n = parseInt(val);
+  const display = prefix
+    ? prefix + ' ' + n.toLocaleString('en-ZA') + suffix
+    : n + suffix;
+  document.getElementById('val-' + id).textContent = display;
+}
+
+async function assess() {
+  const btn = document.getElementById('btn');
+  btn.disabled = true;
+  btn.textContent = 'Assessing...';
+
+  const payload = {
+    income:        parseInt(document.getElementById('income').value),
+    age:           parseInt(document.getElementById('age').value),
+    loan_amount:   parseInt(document.getElementById('loan_amount').value),
+    credit_score:  parseInt(document.getElementById('credit_score').value),
+    existing_debt: parseInt(document.getElementById('existing_debt').value),
+  };
+
+  try {
+    const res  = await fetch('/predict', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    render(data);
+  } catch(e) {
+    alert('Could not reach the model. Is the server running?');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Assess Application';
+  }
+}
+
+function render(data) {
+  document.getElementById('placeholder').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  const approved = data.decision === 'Approved';
+  const cls      = approved ? 'approved' : 'denied';
+
+  document.getElementById('d-tag').className  = 'decision-tag ' + cls;
+  document.getElementById('d-tag').textContent = 'Decision';
+  document.getElementById('d-word').className  = 'decision-word ' + cls;
+  document.getElementById('d-word').textContent = data.decision;
+  document.getElementById('d-conf').textContent = `Model confidence: ${data.confidence}%`;
+
+  const exp    = data.explanation;
+  const maxAbs = Math.max(...Object.values(exp).map(Math.abs));
+  const rows   = document.getElementById('shap-rows');
+  rows.innerHTML = '';
+
+  // Sort by absolute value so biggest driver is on top
+  const sorted = Object.entries(exp).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+
+  sorted.forEach(([feature, val]) => {
+    const pct = (Math.abs(val) / maxAbs) * 46;
+    const row = document.createElement('div');
+    row.className = 'shap-row';
+    row.innerHTML = `
+      <div class="shap-name">${labels[feature] || feature}</div>
+      <div class="shap-track">
+        <div class="shap-midline"></div>
+        <div class="shap-fill ${val >= 0 ? 'pos' : 'neg'}" style="width:${pct}%"></div>
+      </div>
+      <div class="shap-num">${val > 0 ? '+' : ''}${val.toFixed(2)}</div>
+    `;
+    rows.appendChild(row);
+  });
+}
+</script>
+</body>
+</html>

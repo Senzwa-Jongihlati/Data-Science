@@ -1,0 +1,101 @@
+Full_Name,Province,Age,Income,Employment_Status,Credit_Score,Home_Owner,Has_Debt,Loan_Approved
+Ayanda Van Wyk,Eastern Cape,61,16127,Unemployed,407,Yes,No,No
+Thabo Mahlangu,North West,21,20091,Self-employed,690,No,Yes,No
+Sipho Naidoo,KwaZulu-Natal,29,64532,Self-employed,343,No,No,No
+Lerato Mokoena,Mpumalanga,43,49062,Employed,645,No,No,Yes
+Thabo Dlamini,KwaZulu-Natal,25,6120,Unemployed,434,Yes,No,No
+Kabelo Ngubane,KwaZulu-Natal,32,65690,Self-employed,529,No,No,No
+Kabelo Ngubane,Northern Cape,62,62423,Unemployed,753,No,Yes,No
+Thabo Mahlangu,Northern Cape,31,17268,Self-employed,319,Yes,Yes,No
+Nomsa Ngubane,Mpumalanga,28,28694,Self-employed,466,No,Yes,No
+Nomsa Mahlangu,Gauteng,24,14148,Self-employed,368,No,No,No
+Lerato Van Wyk,North West,20,25765,Self-employed,487,Yes,No,No
+Nomsa Naidoo,KwaZulu-Natal,37,32289,Self-employed,394,Yes,No,No
+Ayanda Mahlangu,Mpumalanga,65,30758,Self-employed,809,Yes,No,Yes
+Sipho Mahlangu,Northern Cape,61,49220,Self-employed,725,No,No,Yes
+Lindiwe Khumalo,Western Cape,64,19939,Self-employed,348,Yes,Yes,No
+Ayanda Dlamini,Free State,62,50850,Unemployed,537,Yes,Yes,No
+Mpho Khumalo,Eastern Cape,20,20290,Employed,804,Yes,Yes,No
+Thabo Khumalo,Eastern Cape,33,50904,Unemployed,388,Yes,No,No
+Kabelo Mokoena,Western Cape,55,34153,Unemployed,800,No,Yes,No
+Themba Van Wyk,North West,20,39285,Employed,368,No,Yes,No
+Themba Van Wyk,North West,44,25913,Employed,737,Yes,Yes,No
+Kabelo Jacobs,Western Cape,28,64565,Self-employed,340,No,Yes,No
+Nomsa Jacobs,Gauteng,44,63770,Unemployed,718,No,No,No
+Themba Mahlangu,Western Cape,57,30730,Employed,576,No,Yes,No
+Kabelo Naidoo,Eastern Cape,58,55392,Unemployed,498,No,No,No
+Nomsa Van Wyk,Free State,29,56134,Employed,319,No,Yes,No
+Ayanda Jacobs,Northern Cape,42,39488,Employed,550,Yes,No,No
+Thabo Mokoena,Western Cape,30,10669,Unemployed,559,Yes,No,No
+Lindiwe Dlamini,Gauteng,24,29457,Employed,717,No,Yes,No
+Lindiwe Ngubane,Eastern Cape,62,26094,Employed,430,Yes,No,No
+Zanele Nkosi,Free State,65,43277,Unemployed,812,No,No,No
+Sipho Nkosi,KwaZulu-Natal,58,3719,Unemployed,395,Yes,Yes,No
+Thabo Mahlangu,North West,38,17311,Employed,660,Yes,Yes,No
+Nomsa Mahlangu,Western Cape,29,35960,Self-employed,390,Yes,Yes,No
+Kabelo Van Wyk,Northern Cape,62,16978,Employed,475,Yes,Yes,No
+Lindiwe Dlamini,Gauteng,22,54100,Unemployed,629,Yes,No,No
+Ayanda Ngubane,Western Cape,61,18931,Self-employed,725,No,No,Yes
+Themba Van Wyk,Northern Cape,39,37323,Employed,742,Yes,No,Yes
+Zanele Pillay,Western Cape,57,11922,Employed,478,No,Yes,No
+Lindiwe Ngubane,Eastern Cape,61,22643,Unemployed,540,No,Yes,No
+Thabo Nkosi,Gauteng,62,49685,Self-employed,390,No,No,No
+Lindiwe Naidoo,Free State,19,66177,Employed,631,No,No,Yes
+Lerato Nkosi,Western Cape,31,63604,Self-employed,511,No,Yes,No
+Sipho Mahlangu,Gauteng,61,26325,Self-employed,481,Yes,No,No
+Kabelo Ngubane,North West,27,45986,Employed,305,Yes,No,No
+Zanele Dlamini,KwaZulu-Natal,58,69216,Unemployed,685,No,No,No
+Lindiwe Naidoo,Eastern Cape,56,48143,Self-employed,698,Yes,No,Yes
+Ayanda Mokoena,KwaZulu-Natal,20,33090,Unemployed,758,No,Yes,No
+Zanele Van Wyk,Eastern Cape,30,22136,Self-employed,711,No,Yes,No
+Sipho Pillay,Northern Cape,27,53818,Employed,507,Yes,Yes,No
+Nomsa Nkosi,North West,47,57504,Unemployed,686,No,Yes,No
+Sipho Mahlangu,Free State,57,59716,Employed,563,Yes,No,No
+Mpho Ngubane,Gauteng,24,39284,Self-employed,767,No,Yes,No
+Lindiwe Mahlangu,Limpopo,47,50589,Employed,402,No,Yes,No
+Lindiwe Mokoena,Gauteng,25,35664,Employed,385,No,No,No
+Lindiwe Dlamini,Northern Cape,35,20691,Unemployed,745,Yes,Yes,No
+Themba Mahlangu,Mpumalanga,65,66287,Self-employed,395,Yes,No,No
+Lerato Jacobs,Mpumalanga,26,54416,Self-employed,401,No,No,No
+Nomsa Dlamini,North West,59,39671,Self-employed,626,No,No,Yes
+Ayanda Jacobs,Western Cape,48,19173,Unemployed,753,No,No,No
+Lerato Mokoena,Eastern Cape,25,44732,Employed,812,No,Yes,No
+Zanele Khumalo,North West,63,17195,Unemployed,785,Yes,No,No
+Ayanda Nkosi,Limpopo,65,15204,Employed,482,No,No,No
+Sipho Ngubane,Free State,58,25737,Unemployed,381,Yes,Yes,No
+Lerato Khumalo,KwaZulu-Natal,34,50716,Employed,602,Yes,Yes,No
+Zanele Jacobs,Free State,38,32017,Employed,568,Yes,Yes,No
+Nomsa Nkosi,Free State,47,37074,Self-employed,330,Yes,No,No
+Themba Mokoena,Eastern Cape,48,47045,Unemployed,522,No,Yes,No
+Nomsa Dlamini,Northern Cape,23,69694,Employed,316,Yes,No,No
+Lerato Khumalo,Mpumalanga,31,28723,Self-employed,815,Yes,No,Yes
+Thabo Naidoo,North West,26,52938,Employed,505,No,Yes,No
+Ayanda Naidoo,Limpopo,49,31716,Unemployed,413,Yes,No,No
+Zanele Nkosi,Eastern Cape,37,8487,Self-employed,441,No,Yes,No
+Nomsa Khumalo,KwaZulu-Natal,61,21522,Self-employed,554,No,Yes,No
+Lindiwe Naidoo,Northern Cape,54,19922,Self-employed,569,No,Yes,No
+Lindiwe Van Wyk,KwaZulu-Natal,52,26762,Self-employed,617,Yes,No,Yes
+Lerato Ngubane,Eastern Cape,50,39742,Unemployed,444,Yes,Yes,No
+Zanele Pillay,Eastern Cape,38,23764,Unemployed,375,Yes,No,No
+Sipho Jacobs,Eastern Cape,50,10663,Self-employed,739,Yes,No,No
+Mpho Mokoena,Western Cape,23,42354,Employed,559,No,Yes,No
+Nomsa Nkosi,Gauteng,64,31753,Employed,595,Yes,Yes,No
+Mpho Nkosi,KwaZulu-Natal,40,64613,Employed,736,No,Yes,No
+Ayanda Van Wyk,Mpumalanga,62,13291,Unemployed,623,Yes,No,No
+Zanele Mokoena,Eastern Cape,35,15585,Unemployed,334,Yes,No,No
+Sipho Ngubane,Eastern Cape,28,64586,Employed,535,Yes,Yes,No
+Nomsa Dlamini,Northern Cape,46,40104,Self-employed,450,No,No,No
+Nomsa Mokoena,Limpopo,21,61371,Unemployed,398,Yes,Yes,No
+Nomsa Jacobs,Eastern Cape,19,7276,Employed,831,Yes,No,No
+Lindiwe Pillay,Free State,55,58185,Self-employed,631,Yes,Yes,No
+Ayanda Ngubane,Limpopo,55,11513,Unemployed,311,Yes,No,No
+Mpho Jacobs,Free State,25,40272,Unemployed,317,Yes,Yes,No
+Themba Nkosi,KwaZulu-Natal,63,8062,Employed,798,Yes,Yes,No
+Lindiwe Khumalo,Mpumalanga,49,5937,Self-employed,755,Yes,No,No
+Thabo Van Wyk,Limpopo,51,10033,Employed,367,Yes,No,No
+Lindiwe Pillay,Mpumalanga,26,34872,Unemployed,378,No,Yes,No
+Mpho Ngubane,Eastern Cape,54,2506,Employed,652,No,No,No
+Mpho Naidoo,Mpumalanga,30,62356,Unemployed,570,No,Yes,No
+Kabelo Van Wyk,Free State,55,15617,Unemployed,646,No,No,No
+Sipho Pillay,Mpumalanga,49,58250,Self-employed,374,Yes,No,No
+Themba Naidoo,Eastern Cape,26,2246,Self-employed,315,Yes,Yes,No
