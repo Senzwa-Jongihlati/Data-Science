@@ -95,3 +95,26 @@ st.caption(
     "Model: XGBoost classifier trained on historical water-quality readings "
     "(pH, turbidity, temperature, dissolved oxygen, BOD, lead, mercury, arsenic)."
 )
+st.subheader("What drives the model's predictions")
+importance_df = pd.DataFrame({
+    "Feature": feature_columns,
+    "Importance": model.feature_importances_,
+}).sort_values("Importance", ascending=True)
+st.bar_chart(importance_df.set_index("Feature"))
+
+
+
+st.subheader("Your reading vs. typical values")
+
+# Class averages from the training data (Water_Quality_Dataset.csv)
+class_averages = pd.DataFrame({
+    "Not Polluted (avg)": [7.29, 5.30, 25.57, 6.68, 3.64, 0.0076, 0.0008, 0.0077],
+    "Polluted (avg)":     [7.25, 10.64, 24.92, 5.86, 5.64, 0.0102, 0.0010, 0.0100],
+    "Your Reading":       [pH, turbidity, temperature, do, bod, lead, mercury, arsenic],
+}, index=feature_columns)
+
+st.dataframe(class_averages.style.format("{:.4f}"))
+
+# Turbidity and BOD are the two strongest signals — chart those specifically
+comparison_chart = class_averages.loc[["Turbidity (NTU)", "BOD (mg/L)"]].T
+st.bar_chart(comparison_chart)
