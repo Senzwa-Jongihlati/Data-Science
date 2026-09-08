@@ -1,0 +1,9 @@
+Feature			Not Polluted (0) avg	Polluted (1) avg
+pH			7.29	7.25
+Turbidity (NTU)		5.30(B)	10.64(B)
+Temperature (°C)	25.57	24.92
+DO (mg/L)		6.68(B)	5.86
+BOD (mg/L)		3.64(B)	5.64(B)
+Lead (mg/L)		0.0076	0.0102
+Mercury (mg/L)		0.0008	0.0010
+Arsenic (mg/L)		0.0077	0.0100

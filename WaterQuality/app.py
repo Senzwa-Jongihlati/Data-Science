@@ -1,56 +1,97 @@
+"""
+Water Quality Pollution Level Predictor - Streamlit App
+----------------------------------------------------------
+A simple web app that takes a single set of water-quality readings
+and predicts whether the water is "Polluted" or "Not Polluted",
+using the model trained by train_model.py.
+
+Run with:
+    streamlit run app.py
+"""
 
 import os
 import streamlit as st
 import pandas as pd
 import joblib
-from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-model = joblib.load(os.path.join(BASE_DIR, "xgb_forecast_model.joblib"))
-feature_columns = joblib.load(os.path.join(BASE_DIR, "feature_columns_fc.joblib"))
+MODEL_PATH = os.path.join(BASE_DIR, "pollution_model.joblib")
+FEATURE_COLUMNS_PATH = os.path.join(BASE_DIR, "feature_columns.joblib")
 
-measurement_cols = [
-    "pH", "Turbidity (NTU)", "Temperature (°C)", "DO (mg/L)",
-    "BOD (mg/L)", "Lead (mg/L)", "Mercury (mg/L)", "Arsenic (mg/L)",
-    "Pollution_Level"
-]
+st.set_page_config(page_title="Water Pollution Predictor", page_icon="💧")
 
-st.title("Water Pollution Forecast")
+
+@st.cache_resource
+def load_model():
+    model = joblib.load(MODEL_PATH)
+    feature_columns = joblib.load(FEATURE_COLUMNS_PATH)
+    return model, feature_columns
+
+
+model, feature_columns = load_model()
+
+st.title("💧 Water Pollution Level Predictor")
 st.write(
-    "Enter the last 3 readings at this location (oldest first, most recent last), "
-    "plus the date/time you\'re forecasting for."
+    "Enter a water-quality reading below to predict whether the water "
+    "sample is **Polluted** or **Not Polluted**."
 )
 
-default_rows = pd.DataFrame(
-    [[7.0, 5.0, 25.0, 5.0, 3.0, 0.005, 0.001, 0.005, 1]] * 3,
-    columns=measurement_cols
-)
-history_df = st.data_editor(default_rows, num_rows="fixed", key="history")
+st.subheader("Water Quality Reading")
 
-st.subheader("Timestamp to forecast")
-forecast_date = st.date_input("Date")
-forecast_time = st.time_input("Time")
-forecast_dt = datetime.combine(forecast_date, forecast_time)
+col1, col2 = st.columns(2)
 
-if st.button("Predict Pollution Level"):
-    lag1_values = history_df.iloc[-1]
-    roll3_values = history_df[measurement_cols[:-1]].mean()
+with col1:
+    pH = st.number_input("pH", min_value=0.0, max_value=14.0, value=7.25, step=0.01)
+    turbidity = st.number_input(
+        "Turbidity (NTU)", min_value=0.0, max_value=50.0, value=10.2, step=0.1
+    )
+    temperature = st.number_input(
+        "Temperature (°C)", min_value=0.0, max_value=50.0, value=25.0, step=0.1
+    )
+    do = st.number_input(
+        "Dissolved Oxygen - DO (mg/L)", min_value=0.0, max_value=20.0, value=5.9, step=0.1
+    )
 
-    input_row = {}
-    for col in measurement_cols:
-        input_row[f"{col}_lag1"] = lag1_values[col]
-    for col in measurement_cols[:-1]:
-        input_row[f"{col}_roll3"] = roll3_values[col]
+with col2:
+    bod = st.number_input(
+        "BOD (mg/L)", min_value=0.0, max_value=20.0, value=5.5, step=0.1
+    )
+    lead = st.number_input(
+        "Lead (mg/L)", min_value=0.0, max_value=0.05, value=0.01, step=0.001, format="%.4f"
+    )
+    mercury = st.number_input(
+        "Mercury (mg/L)", min_value=0.0, max_value=0.01, value=0.001, step=0.0001, format="%.5f"
+    )
+    arsenic = st.number_input(
+        "Arsenic (mg/L)", min_value=0.0, max_value=0.05, value=0.01, step=0.001, format="%.4f"
+    )
 
-    input_row["hour"] = forecast_dt.hour
-    input_row["dayofweek"] = forecast_dt.weekday()
+if st.button("Predict Pollution Level", type="primary"):
+    input_row = pd.DataFrame(
+        [[pH, turbidity, temperature, do, bod, lead, mercury, arsenic]],
+        columns=feature_columns,
+    )
 
-    input_df = pd.DataFrame([input_row])[feature_columns]
+    prediction = model.predict(input_row)[0]
+    label = "🔴 Polluted" if prediction == 1 else "🟢 Not Polluted"
 
-    prediction = model.predict(input_df)[0]
-    st.success(f"Predicted Pollution Level: {prediction}")
+    st.subheader("Result")
+    if prediction == 1:
+        st.error(f"Prediction: {label}")
+    else:
+        st.success(f"Prediction: {label}")
 
     if hasattr(model, "predict_proba"):
-        proba = model.predict_proba(input_df)[0]
-        proba_df = pd.DataFrame({"Pollution Level": model.classes_, "Probability": proba})
-        st.bar_chart(proba_df.set_index("Pollution Level"))
+        proba = model.predict_proba(input_row)[0]
+        proba_df = pd.DataFrame(
+            {
+                "Pollution Level": ["Not Polluted", "Polluted"],
+                "Probability": proba,
+            }
+        ).set_index("Pollution Level")
+        st.bar_chart(proba_df)
+
+st.caption(
+    "Model: XGBoost classifier trained on historical water-quality readings "
+    "(pH, turbidity, temperature, dissolved oxygen, BOD, lead, mercury, arsenic)."
+)

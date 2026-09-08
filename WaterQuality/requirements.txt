@@ -1,5 +1,6 @@
-streamlit
 pandas
+scikit-learn
+imbalanced-learn
 xgboost
 joblib
-scikit-learn
+streamlit
