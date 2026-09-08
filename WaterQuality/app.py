@@ -1,3 +1,4 @@
+
 """
 Water Quality Pollution Level Predictor - Streamlit App
 ----------------------------------------------------------
@@ -118,3 +119,4 @@ st.dataframe(class_averages.style.format("{:.4f}"))
 # Turbidity and BOD are the two strongest signals — chart those specifically
 comparison_chart = class_averages.loc[["Turbidity (NTU)", "BOD (mg/L)"]].T
 st.bar_chart(comparison_chart)
+
